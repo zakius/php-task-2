@@ -4,7 +4,8 @@ use App\DbConnection;
 
 use App\DateController;
 
-
+use App\NumberController;
+use App\ResultsImporter;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -14,6 +15,8 @@ $value = $data[2];
 
 $routing = [
     "date" => ["class" => DateController::class, "method" => "getResults"],
+    "number" => ["class" => NumberController::class, "method" => "getDatesAndCount"],
+    "import" => ["class" => ResultsImporter::class, "method" => "import"]
 ];
 
 try {
