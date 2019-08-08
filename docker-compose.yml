@@ -1,0 +1,40 @@
+version: '2'
+services:
+
+  pgsql:
+    build: docker/pgsql
+    env_file:
+      - .env
+    environment:
+      POSTGRES_PASSWORD: keepitsecret
+    ports:
+      - '5432:5432'
+
+  php:
+    build: docker/php-fpm
+    ports:
+      - '9002:9000'
+    env_file:
+      - .env
+    volumes:
+      - ./src/:/var/www/api:cached
+      - ./logs/api/:/var/logs:cached
+    links:
+      - pgsql
+    command: bash -c "composer install && php-fpm"
+
+  nginx:
+    build: docker/nginx
+    ports:
+      - '8080:80'
+    links:
+      - php
+    volumes_from:
+      - php
+    volumes:
+      - ./logs/nginx/:/var/log/nginx:cached
+
+  cron:
+    build: docker\cron
+    links:
+      - php
