@@ -3,6 +3,7 @@
 namespace App;
 
 
+use Exception;
 use PDO;
 
 class NumberController
@@ -26,8 +27,8 @@ class NumberController
     {
         if ($number < 1 || $number > 49) {
             throw new Exception("Number has to be in range from 1 to 49", 404);
-
         }
+
         $datesQuery = "SELECT date from results where number = :number order by date";
         $test = $this->dbConnection->prepare($datesQuery);
         $test->bindParam(":number", $number);
