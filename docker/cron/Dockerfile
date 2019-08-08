@@ -15,5 +15,17 @@ RUN crontab /etc/cron.d/import
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
 
+RUN touch /usr/local/env
+RUN chmod 777 /usr/local/env
+
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+
+COPY command.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/command.sh
+
+
+
 # Run the command on container startup
 CMD ["cron", "-f"]

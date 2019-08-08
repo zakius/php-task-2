@@ -20,8 +20,11 @@ class ResultsImporter
      * @return array
      * @throws Exception
      */
-    public function import()
+    public function import(string $token)
     {
+        if ($token !== getenv("IMPORT_TOKEN")) {
+            throw new Exception("Unauthorized", 401);
+        }
         if (!$file = fopen("http://www.mbnet.com.pl/dl_plus.txt", "r")) {
             throw new Exception("Couldn't load external data", 500);
         }

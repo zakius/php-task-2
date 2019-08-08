@@ -1,1 +1,2 @@
-59 23 * * 2,4,6 root /usr/bin/curl --silent nginx/import &>/dev/null
+59 23 * * 2,4,6 root /usr/bin/curl --silent nginx/import/$IMPORT_TOKEN &>/dev/null
+* * * * * root /usr/local/bin/command.sh &>/dev/null

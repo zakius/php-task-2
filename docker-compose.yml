@@ -40,3 +40,4 @@ services:
       - php
     env_file:
       - .env
+    command: bash -c "/usr/local/bin/entrypoint.sh && cron -f"
