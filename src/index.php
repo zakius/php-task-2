@@ -21,6 +21,9 @@ $routing = [
 
 try {
     $dbConnection = DbConnection::getConnection();
+    if(!isset($routing[$endpoint])){
+        throw new Exception("Invalid endpoint", 404);
+    }
     $className = $routing[$endpoint]["class"];
     $methodName = $routing[$endpoint]["method"];
     $class = new $className($dbConnection);
