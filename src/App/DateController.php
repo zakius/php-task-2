@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Exception;
 use PDO;
 
 class DateController
@@ -19,6 +20,7 @@ class DateController
      * @param string $date
      *
      * @return array
+     * @throws Exception
      */
     public function getResults(string $date): array
     {
@@ -31,6 +33,9 @@ class DateController
         $result = array_map(function ($item) {
             return $item["number"];
         }, $results);
+        if (count($results) === 0) {
+            throw new Exception("No results found for specified date.", 404);
+        }
         return $result;
     }
 
