@@ -38,3 +38,5 @@ services:
     build: docker\cron
     links:
       - php
+    env_file:
+      - .env
