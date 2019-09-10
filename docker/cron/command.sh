@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "dupa"  > /usr/local/dupa
-
 # set env variables
 set -a
 . /usr/local/env
